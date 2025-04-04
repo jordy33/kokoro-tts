@@ -4,6 +4,8 @@ Fast performance near real-time on macOS M1
 
 A Text-to-Speech API and web interface using Kokoro ONNX for high-quality speech synthesis.
 
+![](/images/tts.png?raw=true)
+
 ## Features
 
 - FastAPI backend with two endpoints:
