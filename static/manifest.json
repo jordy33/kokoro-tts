@@ -1,0 +1,16 @@
+{
+  "name": "TTS Application",
+  "short_name": "TTS",
+  "description": "Text-to-Speech Application with Kokoro",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "/web",
+  "display": "standalone",
+  "theme_color": "#3333ff",
+  "background_color": "#ffffff"
+}

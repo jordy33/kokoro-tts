@@ -7,7 +7,7 @@ A Text-to-Speech API and web interface using Kokoro ONNX for high-quality speech
 - FastAPI backend with two endpoints:
   - `/dev/timestamps/{filename}`: Download word-level timestamps
   - `/dev/captioned_speech`: Generate speech with timestamps
-- Gradio web interface for easy interaction
+- Integrated Gradio web interface for easy interaction
 - Support for multiple languages (English, Spanish)
 - Various voice options 
 - Multiple output formats (WAV, MP3)
@@ -33,27 +33,21 @@ uv pip install -e .
 
 ```bash
 # If you don't already have them
-wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
-wget https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+curl -LO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+curl -LO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
 ```
 
 ## Running the System
 
-1. Start the API server:
+Start the integrated server:
 
 ```bash
-python api.py
+python main.py
 ```
 
-This will start the API on http://localhost:8880.
-
-2. Start the Gradio interface:
-
-```bash
-python gradio_interface.py
-```
-
-This will start a web interface on http://localhost:8881.
+This will start:
+- The API on http://localhost:8880
+- The web interface on http://localhost:8880/web
 
 ## API Usage
 
@@ -105,3 +99,33 @@ if timestamps_path:
 ## License
 
 See the LICENSE file for details.
+
+
+### Tests:
+```
+# Make the POST request to generate speech
+# -X POST: Specify POST method
+# -H "Content-Type: application/json": Set the content type header
+# -d '{...}': Provide the JSON payload
+# -o output_curl.wav: Save the audio output to a file named output_curl.wav
+# -i: Include the HTTP response headers in the output (so you can see X-Timestamps-Path)
+# Replace voice, input, format as needed
+
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"input": "Testing the API with curl.", "voice": "af_heart", "response_format": "wav", "lang_code": "e"}' \
+     http://localhost:8880/dev/captioned_speech \
+     -o output_curl.wav -i
+```
+
+
+### Pauses:
+```
+Hello. My name is John.
+Hello. ;- my ;- name ;- is ;- John.
+Hello. ;-
+my ;- 
+name ;-
+is ;-
+John.
+```
