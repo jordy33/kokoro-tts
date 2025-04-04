@@ -1,4 +1,6 @@
-# Text-to-Speech API with Gradio Interface
+# Text-to-Speech API with Gradio Interface for Apple Silicon (M1, M2, M3 chips)
+
+Fast performance near real-time on macOS M1
 
 A Text-to-Speech API and web interface using Kokoro ONNX for high-quality speech synthesis.
 
@@ -12,9 +14,13 @@ A Text-to-Speech API and web interface using Kokoro ONNX for high-quality speech
 - Various voice options 
 - Multiple output formats (WAV, MP3)
 
+## Hardware requirements
+Apple Silicon
+
 ## Requirements
 
 - Python 3.12 or higher
+- brew
 - The required model files:
   - `kokoro-v1.0.onnx`
   - `voices-v1.0.bin`
@@ -24,6 +30,7 @@ A Text-to-Speech API and web interface using Kokoro ONNX for high-quality speech
 1. Install Python dependencies:
 
 ```bash
+brew install uv
 uv venv --seed -p 3.12
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 uv pip install -e .

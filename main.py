@@ -10,6 +10,7 @@ import io
 # FastAPI and related imports
 from fastapi import FastAPI, HTTPException, Header, Depends, Request, File, UploadFile
 from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import uvicorn
 
@@ -140,6 +141,14 @@ def get_tts_service():
 
 # --- FastAPI App Initialization ---
 app = FastAPI(title="TTS API", description="Text-to-Speech API using Kokoro")
+
+# --- Mount Static Files ---
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Add a specific route for favicon.ico
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse("static/favicon.ico")
 
 # --- FastAPI Request Models ---
 class CaptionedSpeechRequest(BaseModel):
